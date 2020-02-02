@@ -1,0 +1,5 @@
+proxy_protocol: http
+
+proxy_host: serverproxy.contoso.net
+
+proxy_port: 8080

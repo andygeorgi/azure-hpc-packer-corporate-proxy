@@ -1,0 +1,22 @@
+- name: Copy proxy.sh to init.d
+  template: src=proxy.sh dest=/etc/profile.d/proxy.sh
+- name: Append proxy to yum config
+  lineinfile:
+    path: /etc/yum.conf
+    line: proxy={{ proxy_protocol }}://{{ proxy_host}}:{{ proxy_port }}
+    create: yes
+- name: Append proxy host to waagent config
+  lineinfile:
+    path: /etc/waagent.conf
+    line: HttpProxy.Host={{ proxy_host }}
+    create: yes
+- name: Append proxy port to waagent config
+  lineinfile:
+    path: /etc/waagent.conf
+    line: HttpProxy.Port={{ proxy_port }}
+    create: yes
+- name: Append proxy config as default system.d environ
+  lineinfile:
+    path: /etc/systemd/system.conf
+    line: DefaultEnvironment="http_proxy={{ proxy_protocol }}://{{ proxy_host }}:{{ proxy_port }}" "https_proxy={{ proxy_protocol }}://{{ proxy_host }}:{{ proxy_port }}" "HTTP_PROXY={{ proxy_protocol }}://{{ proxy_host }}:{{ proxy_port }}" "HTTPS_PROXY={{ proxy_protocol }}://{{ proxy_host }}:{{ proxy_port }}" "no_proxy=127.0.0.1,localhost" "NO_PROXY=127.0.0.1,localhost"
+    create: yes

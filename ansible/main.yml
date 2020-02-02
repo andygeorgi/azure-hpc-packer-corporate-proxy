@@ -1,0 +1,6 @@
+---
+- name: Prepare Nodes
+  hosts: all
+  become: yes
+  roles:
+    - proxy-user

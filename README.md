@@ -11,6 +11,8 @@ On your local machine or on your build agent, you need to install the following 
 * [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 * [Azure CLI (az)](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
 
+For a quick setup, you can use the [Azure Shell](https://shell.azure.com). All tools are pre-installed there.
+
 ## Ansible Config
 
 Patch the Ansible `group_vars` config in `./ansible/group_vars/all` according to your proxy config:
@@ -22,6 +24,8 @@ proxy_host: serverproxy.contoso.net
 
 proxy_port: 8080
 ```
+
+**Note:** The host configuration is automatically injected by packer at runtime.
 
 ## Packer Config
 

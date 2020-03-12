@@ -3,3 +3,5 @@ proxy_protocol: http
 proxy_host: serverproxy.contoso.net
 
 proxy_port: 8080
+
+no_proxy: 168.63.129.16,localhost,127.0.0.1

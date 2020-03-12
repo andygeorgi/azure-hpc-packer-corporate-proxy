@@ -1,0 +1,7 @@
+[Service]
+Environment="HTTP_PROXY={{ proxy_protocol }}://{{ proxy_host }}:{{ proxy_port }}"
+Environment="http_proxy={{ proxy_protocol }}://{{ proxy_host }}:{{ proxy_port }}"
+Environment="HTTPS_PROXY={{ proxy_protocol }}://{{ proxy_host }}:{{ proxy_port }}"
+Environment="https_proxy={{ proxy_protocol }}://{{ proxy_host }}:{{ proxy_port }}"
+Environment="NO_PROXY={{ no_proxy }}"
+Environment="no_proxy={{ no_proxy }}"

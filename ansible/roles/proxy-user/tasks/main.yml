@@ -22,3 +22,5 @@
     create: yes
 - name: Copy environment to /etc/environment
   template: src=environment dest=/etc/environment
+- name: Copy waagent systemd proxy config  
+  template: src=systemd-waagent-proxy-config dest=/usr/lib/systemd/system/waagent.service.d/proxy.conf

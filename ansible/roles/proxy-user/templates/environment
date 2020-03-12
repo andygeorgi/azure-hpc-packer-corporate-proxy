@@ -1,8 +1,8 @@
-http_proxy="{{ proxy_protocol }}://{{ proxy_host }}:{{ proxy_port }}"
-https_proxy="{{ proxy_protocol }}://{{ proxy_host }}:{{ proxy_port }}"
+http_proxy={{ proxy_protocol }}://{{ proxy_host }}:{{ proxy_port }}
+https_proxy={{ proxy_protocol }}://{{ proxy_host }}:{{ proxy_port }}
 
-HTTP_PROXY="{{ proxy_protocol }}://{{ proxy_host }}:{{ proxy_port }}"
-HTTPS_PROXY="{{ proxy_protocol }}://{{ proxy_host }}:{{ proxy_port }}"
+HTTP_PROXY={{ proxy_protocol }}://{{ proxy_host }}:{{ proxy_port }}
+HTTPS_PROXY={{ proxy_protocol }}://{{ proxy_host }}:{{ proxy_port }}
 
-no_proxy="{{ no_proxy }}"
-NO_PROXY="{{ no_proxy }}"
+no_proxy={{ no_proxy }}
+NO_PROXY={{ no_proxy }}

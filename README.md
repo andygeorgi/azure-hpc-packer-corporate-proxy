@@ -13,20 +13,6 @@ On your local machine or on your build agent, you need to install the following 
 
 For a quick setup, you can use the [Azure Shell](https://shell.azure.com). All tools are pre-installed there.
 
-## Ansible Config
-
-Patch the Ansible `group_vars` config in `./ansible/group_vars/all` according to your proxy config:
-
-```txt
-proxy_protocol: http
-
-proxy_host: serverproxy.contoso.net
-
-proxy_port: 8080
-```
-
-**Note:** The host configuration is automatically injected by packer at runtime.
-
 ## Packer Config
 
 Packer requires access to an Azure Subscription to automate the creation of the VM image. There are [multiple ways to achieve that](https://www.packer.io/docs/builders/azure.html). In this example, the configuration of an Azure AD Service Principal is provided via Packer variables. This is most often the case for an end-to-end automation.
@@ -44,6 +30,29 @@ You can either provide a env.json file like this:
 ... and pass the variables like this to Packer `-var-file=./env.json`.
 Alternatively, you can pass all variables individually without a var-file.
 
+To modify the behavior of the Ansible Proxy configuration process, you can add a second var-file or insert the following config in your env.json:
+
+```json
+{
+    "proxy_protocol": "http",
+    "proxy_host": "serverproxy.contoso.net",
+    "proxy_port": "8080",
+    "no_proxy": "169.254.169.254,168.63.129.16,localhost,127.0.0.1"
+}
+```
+
+And finally, if you need to provision everything in a **private VNet without public IP address**, you have to add the following config:
+
+```json
+{
+    "vnet_name": "TBD",
+    "vnet_subnet_name": "TBD",
+    "vnet_rg_name": "TBD"
+}
+```
+
+and call packer with the `packer_private_vnet.json` template (see section **Run**).
+
 ## Variables
 
 Besides passing the base config for Azure authentication, you can also modify the packer invocation with additional variables, see `./packer.json`'s variable section.
@@ -51,8 +60,13 @@ Besides passing the base config for Azure authentication, you can also modify th
 ## Run
 
 Invoke packer and building the image:
-```
+```bash
 packer build -var-file=./env.json packer.json
+```
+
+For **private VNet**:
+```bash
+packer build -var-file=./env.json packer_private_vnet.json
 ```
 
 Please note, that the target resource group for the packer images needs to exist. With the default variable configuration in `packer.json`, you can create the resource group via Azure CLI:

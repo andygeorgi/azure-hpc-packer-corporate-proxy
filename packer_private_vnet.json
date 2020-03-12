@@ -15,7 +15,8 @@
     "proxy_protocol": "http",
     "proxy_host": "serverproxy.contoso.net",
     "proxy_port": "8080",
-    "no_proxy": "169.254.169.254,168.63.129.16,localhost,127.0.0.1",
+    "default_no_proxy": "169.254.169.254,168.63.129.16,localhost,127.0.0.1",
+    "no_proxy": "",
     "vnet_name": "",
     "vnet_subnet_name": "",
     "vnet_rg_name": ""
@@ -55,7 +56,7 @@
     {
       "type": "ansible",
       "playbook_file": "./ansible/main.yml",
-      "extra_arguments": ["--verbose", "--extra-vars", "proxy_protocol={{user `proxy_protocol`}} proxy_host={{user `proxy_host`}} proxy_port={{user `proxy_port`}} no_proxy={{user `no_proxy`}}"]
+      "extra_arguments": ["--verbose", "--extra-vars", "proxy_protocol={{user `proxy_protocol`}} proxy_host={{user `proxy_host`}} proxy_port={{user `proxy_port`}} no_proxy={{user `default_no_proxy`}},{{user `no_proxy`}}"]
     },
     {
     "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",

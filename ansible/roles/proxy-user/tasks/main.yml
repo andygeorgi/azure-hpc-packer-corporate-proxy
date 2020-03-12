@@ -22,5 +22,7 @@
     create: yes
 - name: Copy environment to /etc/environment
   template: src=environment dest=/etc/environment
+- name: Ensures /usr/lib/systemd/system/waagent.service.d dir exists
+  file: path=/usr/lib/systemd/system/waagent.service.d state=directory recurse=yes
 - name: Copy waagent systemd proxy config  
   template: src=systemd-waagent-proxy-config dest=/usr/lib/systemd/system/waagent.service.d/proxy.conf

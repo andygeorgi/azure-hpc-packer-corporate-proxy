@@ -12,6 +12,10 @@
     "base_image_offer": "CentOS",
     "base_image_sku": "7.6",
     "ansible_install_cmd": "yum -y install ansible",
+    "proxy_protocol": "http",
+    "proxy_host": "serverproxy.contoso.net",
+    "proxy_port": "8080",
+    "no_proxy": "169.254.169.254,168.63.129.16,localhost,127.0.0.1",
     "vnet_name": "",
     "vnet_subnet_name": "",
     "vnet_rg_name": ""
@@ -50,7 +54,8 @@
   "provisioners": [
     {
       "type": "ansible",
-      "playbook_file": "./ansible/main.yml"
+      "playbook_file": "./ansible/main.yml",
+      "extra_arguments": ["--verbose", "--extra-vars", "proxy_protocol={{user `proxy_protocol`}} proxy_host={{user `proxy_host`}} proxy_port={{user `proxy_port`}} no_proxy={{user `no_proxy`}}"]
     },
     {
     "execute_command": "chmod +x {{ .Path }}; {{ .Vars }} sudo -E sh '{{ .Path }}'",

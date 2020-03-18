@@ -9,7 +9,7 @@
     "location": "West Europe",
     "vm_size": "Standard_H8",
     "base_image_publisher": "OpenLogic",
-    "base_image_offer": "CentOS",
+    "base_image_offer": "CentOS-HPC",
     "base_image_sku": "7.6",
     "ansible_install_cmd": "yum -y install ansible",
     "proxy_protocol": "http",

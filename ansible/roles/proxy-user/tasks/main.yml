@@ -1,3 +1,7 @@
+- name: upgrade all packages
+  yum:
+    name: '*'
+    state: latest
 - name: Copy proxy.sh to init.d
   template: src=proxy.sh dest=/etc/profile.d/proxy.sh
 - name: Append proxy to yum config
